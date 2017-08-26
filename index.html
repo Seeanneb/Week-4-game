@@ -1,0 +1,102 @@
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>Crystal Collector</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="Assets/Css/style.css">
+
+		<style type="text/css">
+			
+			
+		</style>
+
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  		<script type="text/javascript">
+  
+ 
+  
+
+$(document).ready(function(){
+	console.log("hi");
+
+	var counter = 0;
+
+	function getRandomNumber(minTarget, maxTarget) {
+  	return Math.floor(Math.random()*(Math.floor(maxTarget) - Math.ceil(minTarget)))+Math.ceil(minTarget)};
+
+	// var minCrystal = Math.ceil(1)
+	// var maxCrystal = Math.floor(12);	
+	// var randomCrystal = Math.floor(Math.random()*(maxTarget - minTarget))+minTarget;
+	var randomCrystal = getRandomNumber(1, 12);
+	var randomTarget = getRandomNumber(19, 120);
+
+
+	var numberOptions = [getRandomNumber(1,12),getRandomNumber(1,12),getRandomNumber(1,12),getRandomNumber(1,12),]; // 0's to be replaced with random numbers...
+	// var numberOptions = [2,4,6,9];
+
+	
+	$("#target-score").text(randomTarget);
+
+	for (var i = 0; i < numberOptions.length; i++) {
+		var crystalPic = $("<img>");
+		crystalPic.addClass("pic-crystal");
+		crystalPic.attr("src","http://winefolly.com/wp-content/uploads/2012/12/louis-roederer-cristal-champagne-brand.jpg" );
+		crystalPic.attr("data-crystal-value", numberOptions[i]);
+		$("#crystals").append(crystalPic);
+	
+	}
+		$(".pic-crystal").on("click",function() {
+
+	var crystalValue = ($(this).attr("data-crystal-value"));
+	crystalValue = parseInt(crystalValue);
+	console.log(crystalValue);
+
+	counter += crystalValue;
+	$("#player-score").text(counter);
+
+	if (counter === randomTarget) {
+		alert("You Win!!!");
+		location.reload();
+
+	}
+	else if (counter >= randomTarget) {
+		alert("bad math ur dumb!");
+		location.reload();
+	}
+
+	$(".btn").click(function(){
+		location.reload();
+	});
+
+	
+});
+
+
+});
+		
+// add a class for each div element to put the proper image onto the correct image
+
+  </script>
+
+
+
+</head>
+<body>
+	<h1>Crystal Collector</h1>
+	 <h2>Score to get: <span id="target-score"></span></h2>
+	  <h3>Your score: <span id="player-score"></span></h3>
+		<div id="crystals"></div>
+					
+				
+
+
+
+		<button class="btn btn-primary">New Game</button>
+
+
+
+
+</body>
+</html>
